@@ -34,6 +34,7 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -103,8 +104,12 @@ fun CrewBackdropContent(state: BackdropScaffoldState) {
     BoxWithConstraints(Modifier.fillMaxSize()) {
         val peekHeightInPx = LocalDensity.current.run { 56.dp.toPx() }
         val maxPeekOffset = LocalDensity.current.run { maxHeight.toPx() - peekHeightInPx }
-        val peekOffset = state.offset.value - peekHeightInPx
-        val peekRatio = peekOffset / maxPeekOffset
+        val peekOffset by remember {
+            derivedStateOf { state.offset.value - peekHeightInPx }
+        }
+        val peekRatio by remember {
+            derivedStateOf { peekOffset / maxPeekOffset }
+        }
 
         Column(
             modifier = Modifier
