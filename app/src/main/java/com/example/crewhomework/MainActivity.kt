@@ -208,7 +208,7 @@ fun FlippableCard(
     faceContent: @Composable () -> Unit,
 ) {
     val flipAnimationAngle by animateFloatAsState(
-        targetValue = if (isFlipped) 180f else 0f,
+        targetValue = if (isFlipped) 0f else 180f,
         animationSpec = tween(
             durationMillis = 400,
             easing = FastOutSlowInEasing,
@@ -220,11 +220,11 @@ fun FlippableCard(
         colors = colors,
         modifier = modifier
             .graphicsLayer {
-                rotationX = 180 - flipAnimationAngle
+                rotationX = flipAnimationAngle
                 cameraDistance = 16f
             }
     ) {
-        if (flipAnimationAngle < 90) {
+        if (flipAnimationAngle > 90) {
             backContent()
         } else {
             faceContent()
