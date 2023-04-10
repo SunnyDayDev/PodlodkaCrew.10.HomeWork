@@ -3,15 +3,24 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
 rootProject.name = "Crew.HomeWork"
-include(":app")
+
+include(":shared")
+include(":design")
+
+include(":androidApp")
+include(":iosApp")
+include(":jsApp")
+include(":desktopApp")
